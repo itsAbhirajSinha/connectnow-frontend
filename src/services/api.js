@@ -10,7 +10,6 @@ export const getMeetToken = async (room, user) => {
         const res = await axios.get(`https://connectnow-backend.vercel.app/getToken`, {
             params,
             headers: {
-                'Access-Control-Allow-Origin': '*', // or specific origin if needed
                 'Content-Type': 'application/json',
             },
         });
