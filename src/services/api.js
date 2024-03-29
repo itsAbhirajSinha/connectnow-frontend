@@ -1,12 +1,24 @@
-import axios from "axios"
+import axios from "axios";
 
-export const getMeetToken=(room,user)=>{
-   
-    const params={
-        "roomName":room,
-        "participantName":user
+export const getMeetToken = async (room, user) => {
+    try {
+        const params = {
+            "roomName": room,
+            "participantName": user
+        };
+
+        const res = await axios.get(`https://connectnow-backend.vercel.app/getToken`, {
+            params,
+            headers: {
+                'Access-Control-Allow-Origin': '*', // or specific origin if needed
+                'Content-Type': 'application/json',
+            },
+        });
+
+        return res.data;
+    } catch (error) {
+        // Handle error
+        console.error('Error fetching token:', error);
+        throw error; // Rethrow error for the caller to handle
     }
-  
-    const res = axios.get(`https://connectnow-backend.vercel.app/getToken`,{params})
-    return res
-}
+};
